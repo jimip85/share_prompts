@@ -22,7 +22,23 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [posts, setPosts] = useState([]);
 
-  const handleSearchChange = (e) => {};
+  const handleSearchChange = (e) => {
+    const searchText = e.target.value;
+    setSearchText(searchText);
+
+    const filteredPosts = searchText
+      ? posts.filter((post) => {
+          return (
+            post.creator.username
+              .toLowerCase()
+              .includes(searchText.toLowerCase()) ||
+            post.tag.toLowerCase().includes(searchText.toLowerCase())
+          );
+        })
+      : posts;
+
+    setPosts(filteredPosts);
+  };
 
   const fetchPosts = async () => {
     const response = await fetch("/api/prompt");

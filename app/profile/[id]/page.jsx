@@ -11,14 +11,14 @@ const UserProfile = ({ params }) => {
 
   const [userPosts, setUserPosts] = useState([]);
 
+  const fetchPosts = async () => {
+    const response = await fetch(`/api/users/${params?.id}/posts`);
+    const data = await response.json();
+
+    setUserPosts(data);
+  };
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${params?.id}/posts`);
-      const data = await response.json();
-
-      setUserPosts(data);
-    };
-
     if (params?.id) fetchPosts();
   }, [params.id]);
 

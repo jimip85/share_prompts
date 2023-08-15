@@ -30,13 +30,13 @@
 
 .main:after {
   content: "";
-  background-image: url("/assets/images/grid.svg");
+  background-image: url("/grid/bg.jpg");
   z-index: 1;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
-  opacity: 0.4;
+  opacity: 0.2;
   filter: invert(1);
 }
 
@@ -78,11 +78,11 @@
 }
 
 .black_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-xl border shadow-lg border-black bg-purple-900 py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
 }
 
 .outline_btn {
-  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-xl border shadow-lg border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
 
 .head_text {
@@ -91,6 +91,14 @@
 
 .orange_gradient {
   @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+}
+
+.purple_gradient {
+  @apply bg-gradient-to-r from-purple-900 via-purple-400 to-black bg-clip-text text-transparent;
+}
+
+.purple_gradient_light {
+  @apply bg-gradient-to-r from-purple-900 to-purple-500 bg-clip-text text-transparent;
 }
 
 .green_gradient {

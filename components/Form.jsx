@@ -4,7 +4,9 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
     <section className="w-full max-w-full flex-start flex-col">
       <h1 className="head_test text-left">
-        <span className="blue_gradient text-4xl font-bold">{type} Post</span>
+        <span className="purple_gradient_light text-4xl font-bold">
+          {type} Post
+        </span>
       </h1>
       <p className="desc text-left max-w-md">
         {type} and distribute captivating prompts globally, igniting your

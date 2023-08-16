@@ -21,7 +21,7 @@ const MyProfile = () => {
   useEffect(() => {
     if (session?.user.id) fetchPosts();
   }, []);
-  
+
   const handleEdit = (post) => {
     router.push(`/update-prompt?id=${post._id}`);
   };
@@ -47,7 +47,7 @@ const MyProfile = () => {
   return (
     <Profile
       name="My"
-      desc="Welcome to your personalized profile page"
+      desc="Welcome to your personalized profile page."
       data={posts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}

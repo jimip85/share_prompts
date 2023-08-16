@@ -1,0 +1,19 @@
+import React from "react";
+
+const Search = ({ searchText, handleSearchChange }) => {
+  return (
+    <>
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-900 to-black rounded-lg blur opacity-75 group-hover:opacity-100 transition group-hover:duration-200 animate-tilt"></div>
+      <input
+        type="text"
+        placeholder="Search for a tag or a username..."
+        value={searchText}
+        onChange={handleSearchChange}
+        required
+        className="search_input relative"
+      />
+    </>
+  );
+};
+
+export default Search;

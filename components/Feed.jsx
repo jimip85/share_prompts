@@ -6,16 +6,24 @@ import PromptCard from "./PromptCard";
 
 import Search from "./Search";
 
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
-    <div className="mt-10 prompt_layout">
-      {data.map((post) => (
-        <PromptCard
-          key={post._id}
-          post={post}
-          handleTagClick={handleTagClick}
-        />
-      ))}
+    <div className="mt-10 space-y-6 sm:columns-2 sm:gap-6 xl:columns-3">
+      <TransitionGroup>
+        {data.map((post) => (
+          <CSSTransition key={post._id} timeout={400} classNames="fade">
+            <div className="mb-6">
+              <PromptCard
+                key={post._id}
+                post={post}
+                handleTagClick={handleTagClick}
+              />
+            </div>
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </div>
   );
 };
@@ -58,7 +66,7 @@ const Feed = () => {
       setTimeout(() => {
         const searchResult = filterPrompts(e.target.value);
         setSearchedResults(searchResult);
-      }, 500)
+      }, 400)
     );
   };
 

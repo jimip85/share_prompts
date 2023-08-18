@@ -23,13 +23,15 @@ const Navbar = () => {
   return (
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
-        <Image
-          src="/images/logo.svg"
-          alt="Promptify Logo"
-          width={40}
-          height={40}
-          className="object-contain"
-        />
+        <div className="rounded-full border-r-2 border-black">
+          <Image
+            src="/images/Logo2.0.svg"
+            alt="Promptify Logo"
+            width={57}
+            height={57}
+            className="rounded-full object-fill"
+          />
+        </div>
         <p className="logo_text">Promptify</p>
       </Link>
 

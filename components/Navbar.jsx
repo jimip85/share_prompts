@@ -1,18 +1,14 @@
-"use client"
-import React, { useState, useEffect } from "react";
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import {
-  signIn,
-  signOut,
-  useSession,
-  getProviders,
-} from "next-auth/react";
+import { useState, useEffect } from "react";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const { data: session } = useSession();
-  const [providers, setProviders] = useState<any>(null);
-  const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
+  const [providers, setProviders] = useState(null);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -46,11 +42,7 @@ const Navbar: React.FC = () => {
             <Link href="/create-prompt" className="black_btn">
               Create Post
             </Link>
-            <button type="button" onClick={(event) => {
-    event.preventDefault();
-    setToggleDropdown(false);
-    signOut();
-  }} className="outline_btn">
+            <button type="button" onClick={signOut} className="outline_btn">
               Sign Out
             </button>
 
@@ -67,7 +59,7 @@ const Navbar: React.FC = () => {
         ) : (
           <>
             {providers &&
-              Object.values(providers).map((provider: any) => (
+              Object.values(providers).map((provider) => (
                 <button
                   type="button"
                   key={provider.name}
@@ -126,7 +118,7 @@ const Navbar: React.FC = () => {
         ) : (
           <>
             {providers &&
-              Object.values(providers).map((provider: any) => (
+              Object.values(providers).map((provider) => (
                 <button
                   type="button"
                   key={provider.name}

@@ -3,16 +3,16 @@ import "@styles/globals.css";
 import Navbar from "@components/Navbar";
 import Provider from "@components/Provider";
 
-interface RootLayoutProps {
-  children: React.ReactNode;
-  session: any; 
-}
+export const metadata = {
+  title: "Promptify",
+  description: "Discover & Disseminate Effective AI Prompts",
+};
 
-const RootLayout: React.FC<RootLayoutProps> = ({ children, session }) => {
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <Provider session={session}>
+        <Provider>
           <div className="main">
             <div className="gradient" />
           </div>

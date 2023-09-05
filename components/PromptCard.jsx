@@ -1,44 +1,17 @@
-"use client"
+"use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usPathname, usePathname, useRouter } from "next/navigation";
 
- interface User {
-  _id: string;
-  username: string;
-  email: string;
-  image: string;
-}
-
- interface Post {
-  creator: User;
-  prompt: string;
-  tag: string;
-}
-
-interface PromptCardProps {
-  post: Post;
-  handleTagClick?: (tag: string) => void;
-  handleEdit?: () => void;
-  handleDelete?: () => void;
-}
-
-const PromptCard: React.FC<PromptCardProps> = ({
-  post,
-  handleTagClick,
-  handleEdit,
-  handleDelete,
-}) => {
-  const { data: session } = useSession<boolean>();
+const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+  const { data: session } = useSession();
 
   const pathName = usePathname();
   const router = useRouter();
 
-  const [copied, setCopied] = useState<string>("");
-
-  console.log(session)
+  const [copied, setCopied] = useState("");
 
   const handleCopy = () => {
     setCopied(post.prompt);
@@ -69,7 +42,6 @@ const PromptCard: React.FC<PromptCardProps> = ({
         <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={copied === post.prompt ? "/icons/tick.svg" : "/icons/copy.svg"}
-            alt="copy-text image"
             width={12}
             height={12}
           />
@@ -82,11 +54,11 @@ const PromptCard: React.FC<PromptCardProps> = ({
       >
         #{post.tag}
       </p>
-      {(session?.user as { id: string })?.id === post.creator._id && pathName === "/profile" && (
+      {session?.user.id === post.creator._id && pathName === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-md font-semibold text-purple-600 cursor-pointer"
-            onClick={handleEdit}   
+            onClick={handleEdit}
           >
             Edit
           </p>

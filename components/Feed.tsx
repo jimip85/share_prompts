@@ -1,22 +1,44 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
-
 import Search from "./Search";
-
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+
+interface User {
+  _id: string;
+  username: string;
+  email: string;
+  image: string;
+}
+
+ interface Post {
+  creator: User;
+  prompt: string;
+  tag: string;
+}
+
+interface PromptCardListProps {
+  data: Post[];
+  handleTagClick: (tagName: string) => void;
+}
+
+
+const PromptCardList: React.FC<PromptCardListProps> = ({
+  data,
+  handleTagClick,
+}) => {
+
+  console.log(data);
   return (
     <div className="mt-10 space-y-6 sm:columns-2 sm:gap-6 xl:columns-3">
       <TransitionGroup>
         {data.map((post) => (
-          <CSSTransition key={post._id} timeout={400} classNames="fade">
+          <CSSTransition timeout={400} classNames="fade">
             <div className="mb-6">
               <PromptCard
-                key={post._id}
+                key={post.creator._id}
                 post={post}
                 handleTagClick={handleTagClick}
               />
@@ -28,17 +50,19 @@ const PromptCardList = ({ data, handleTagClick }) => {
   );
 };
 
-const Feed = () => {
-  const [allPosts, setAllPosts] = useState([]);
+const Feed: React.FC = () => {
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
 
   // Search states
-  const [searchText, setSearchText] = useState("");
-  const [searchTimeout, setSearchTimeout] = useState(null);
-  const [searchedResults, setSearchedResults] = useState([]);
+  const [searchText, setSearchText] = useState<string>("");
+  const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
+  const [searchedResults, setSearchedResults] = useState<Post[]>([]);
 
   const fetchPosts = async () => {
     const response = await fetch("/api/prompt");
-    const data = await response.json();
+    const data: Post[] = await response.json();
 
     setAllPosts(data);
   };
@@ -47,8 +71,8 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
-  const filterPrompts = (searchtext) => {
-    const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
+  const filterPrompts = (searchText: string): Post[] => {
+    const regex = new RegExp(searchText, "i"); // 'i' flag for case-insensitive search
     return allPosts.filter(
       (item) =>
         regex.test(item.creator.username) ||
@@ -57,8 +81,11 @@ const Feed = () => {
     );
   };
 
-  const handleSearchChange = (e) => {
-    clearTimeout(searchTimeout);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (searchTimeout) {
+      clearTimeout(searchTimeout);
+    }
+
     setSearchText(e.target.value);
 
     // debounce method
@@ -70,7 +97,7 @@ const Feed = () => {
     );
   };
 
-  const handleTagClick = (tagName) => {
+  const handleTagClick = (tagName: string) => {
     setSearchText(tagName);
 
     const searchResult = filterPrompts(tagName);

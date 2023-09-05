@@ -1,6 +1,26 @@
+import React, { useState } from "react";
 import Link from "next/link";
 
-const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
+interface Post {
+  prompt: string;
+  tag: string;
+}
+
+interface FormProps {
+  type: string;
+  post: Post;
+  setPost: React.Dispatch<React.SetStateAction<Post>>;
+  submitting: boolean;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const Form: React.FC<FormProps> = ({
+  type,
+  post,
+  setPost,
+  submitting,
+  handleSubmit,
+}) => {
   return (
     <section className="w-full max-w-full flex-start flex-col">
       <h1 className="head_test text-left">

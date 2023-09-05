@@ -1,20 +1,26 @@
-"use client";
-import { useState } from "react";
+"use client"
+
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import Form from "@components/Form";
 
-const CreatePrompt = () => {
+interface Post {
+  prompt: string;
+  tag: string;
+}
+
+const CreatePrompt: React.FC = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const [submitting, setSubmitting] = useState(false);
-  const [post, setPost] = useState({
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [post, setPost] = useState<Post>({
     prompt: "",
     tag: "",
   });
 
-  const createPrompt = async (e) => {
+  const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setSubmitting(true);
@@ -25,7 +31,7 @@ const CreatePrompt = () => {
         body: JSON.stringify({
           prompt: post.prompt,
           tag: post.tag,
-          userId: session?.user.id,
+          userId: (session?.user as { id: string }).id,
         }),
       });
 

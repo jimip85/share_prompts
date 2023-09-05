@@ -55,7 +55,7 @@ const PromptCard: React.FC<PromptCardProps> = ({
             alt="user_image"
             width={40}
             height={40}
-            className="rounded-full object-contain"
+            className="rounded-full object-contain border-white border-2"
           />
           <div className="flex flex-col">
             <h3 className="font-satoshi font-semibold text-gray-900">
